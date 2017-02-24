@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+// layout 基准宽度
+$base-layout: 750 !default;
+
+// 字体定义
+$font-family-sans-serif: 'San Francisco', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+$font-family-monospace: Menlo, Monaco, Consolas, 'Courier New', monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+
+// 字体及背景默认色
+$body-bg:      #fff !default;
+$body-color:   #373a3c !default;
+$link-color:   #058;

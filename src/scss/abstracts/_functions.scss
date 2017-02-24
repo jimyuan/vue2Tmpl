@@ -1,0 +1,5 @@
+@charset "utf-8";
+
+@function px2rem($argu) {
+  @return $argu / $base-layout / 10 * 1rem;
+}
