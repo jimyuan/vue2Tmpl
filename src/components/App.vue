@@ -2,20 +2,19 @@
   <div id="app">
     <Navbar></Navbar>
     <router-view class="view"></router-view>
-    <img src="../assets/f-35-carrier-1920-home.jpg" alt="">
-    <p>{{ footMsg }} <time>{{ time | dateTimeFormatter }}</time></p>
+    <Footinfo></Footinfo>
   </div>
 </template>
 
 <script>
 import Navbar from './Navbar'
+import Footinfo from './Footer'
 
 export default {
-  components: { Navbar },
+  components: { Navbar, Footinfo },
   data () {
     return {
-      footMsg: 'This is foot.',
-      time: Date.now()
+
     }
   }
 }

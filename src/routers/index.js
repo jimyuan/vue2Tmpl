@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import userService from '../services/userService'
+import userService from 'SERVICES/userService'
 
 Vue.use(VueRouter)
 
@@ -11,14 +11,14 @@ const router = new VueRouter({
     redirect: '/home'
   }, {
     path: '/home',
-    component: resolve => require(['../pages/Home'], resolve)
+    component: resolve => require(['PAGES/Home'], resolve)
   }, {
     path: '/list',
-    component: resolve => require(['../pages/List'], resolve)
+    component: resolve => require(['PAGES/List'], resolve),
+    meta: { auth: false }
   }, {
-    path: '/call',
-    component: resolve => require(['../pages/Call'], resolve),
-    meta: { auth: true }
+    path: '/login',
+    component: resolve => require(['PAGES/Login'], resolve)
   }]
 })
 

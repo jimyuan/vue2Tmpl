@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
-    <router-link to="/home">HOME</router-link>
-    <router-link to="/list">LIST</router-link>
+    <router-link to="/home">首页</router-link>
+    <router-link to="/list">列表</router-link>
   </div>
 </template>
 

@@ -1,39 +1,70 @@
 <template>
   <div>
     <h2 v-text="msg"></h2>
-    <pre v-text="remote"></pre>
+    <table class="table table-resp">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Desc.</th>
+          <th>Create</th>
+        </tr>
+      </thead>
+      <tbody v-if="!userData">
+        <tr>
+          <td colspan="4" data-row="result">No data yet!</td>
+        </tr>
+      </tbody>
+      <tbody v-else>
+        <tr v-for="user in userData">
+          <td v-text="user.firstName + ' ' + user.lastName" data-row="Name"></td>
+          <td v-text="user.email" data-row="Email"></td>
+          <td v-text="user.description" data-row="Desc."></td>
+          <td v-text="user.createTime" data-row="Create"></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-block btn-primary" @click="fetchUser" v-text="fetchStatus"></button>
   </div>
 </template>
 
 <script>
-import userService from '../services/userService'
+import userService from 'SERVICES/userService'
 
 export default {
   data () {
     return {
       msg: 'LIST PAGE',
-      remote: 'no data',
-      remote2: 'no data'
+      userData: '',
+      remote2: 'no data',
+      fetchStatus: 'Fetch!'
     }
   },
 
   created () {
     // this.fetchRemote()
     // this.secMethod()
-    this.postRemote()
+    // this.fetchRemote()
+  },
+
+  computed: {
   },
 
   watch: {
-    '$route': 'fetchRemote, secMethod'
+    // '$route': 'fetchUser, secMethod'
   },
 
   methods: {
-    fetchRemote () {
-      userService.fetch({username: 'jim'})
-
+    fetchUser () {
+      this.fetchStatus = 'Fetching...'
+      userService.fetch({
+        username: 'Jean',
+        gender: 'Female'
+      })
       .then(data => {
         console.log(data)
-        this.remote = data
+        this.userData = data.users
+        this.fetchStatus = 'Fetch Done!'
       })
     },
 

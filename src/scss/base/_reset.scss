@@ -1,37 +1,9 @@
 @charset "utf-8";
 
-
 html {
-  font-size: 16px;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
-  font-family: $font-family-base;
-  line-height: 1.5;
-  color: $body-color;
-  background-color: $body-bg;
-}
-
-a {
-  color: lighten($link-color, 10%);
-  text-decoration: none;
-}
-
-a.router-link-active {
-  color: $link-color;
-  text-decoration: underline;
-}
-
-img {
-  display: block;
-  border: none;
-  max-width: 100%;
+  padding: $spacer * 3 0 $spacer * 4;
 }

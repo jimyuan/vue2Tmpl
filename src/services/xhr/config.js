@@ -15,7 +15,7 @@ function warnHandler (res) {
 
 env = {
   'local': {
-    webAPI: 'http://localhost:8084'
+    webAPI: 'http://192.168.1.132:8084'
   },
   'dev': {
     webAPI: 'http://10.66.1.133:8081/finance-web'

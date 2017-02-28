@@ -27,10 +27,11 @@ module.exports = {
       resolve('node_modules')
     ],
     alias: {
-      'vue$': 'vue/dist/vue.common.js',
-      'src': resolve('src'),
-      'assets': resolve('src/assets'),
-      'components': resolve('src/components')
+      'SRC': resolve('src'),
+      'ASSETS': resolve('src/assets'),
+      'COMPONENTS': resolve('src/components'),
+      'SERVICES': resolve('src/services'),
+      'PAGES': resolve('src/pages')
     }
   },
   module: {

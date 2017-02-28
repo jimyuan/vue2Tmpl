@@ -1,0 +1,49 @@
+@charset 'utf-8';
+
+.table-resp{
+  border: 1px solid $table-border-color;
+  margin-top: 2rem;
+  font-size: 0.8rem;
+
+  > thead {
+    font-family: $font-family-monospace;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .table-resp {
+    border-width: 0;
+
+    thead {
+      display: none;
+    }
+
+   tr{
+     border: 1px solid $table-border-color;
+     display: block;
+     width: 100%;
+     margin-top: 1rem;
+    }
+
+    > tbody > tr:nth-of-type(odd) {
+      background: transparent;
+    }
+
+    td {
+      display: block;
+
+      &:before {
+        display: inline-block;
+        content: attr(data-row) ":";
+        width: 20%;
+        font-weight: bold;
+      }
+
+      &:first-child {
+        border-width: 0;
+        color: $white;
+        background: $brand-inverse;
+      }
+    }
+  }
+}

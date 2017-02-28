@@ -1,0 +1,25 @@
+@charset 'utf-8';
+
+.navbar {
+  @include fixed(top 0 left 0 right 0);
+  font-size: 0;
+  line-height: 0;
+  text-align: center;
+  background: rgba(white, 0.9);
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+
+  > a {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 2;
+    padding: 0 10px;
+
+    &.router-link-active {
+      text-decoration: none;
+      background: $link-color;
+      color: white;
+      border-radius: 0.2em;
+    }
+  }
+}

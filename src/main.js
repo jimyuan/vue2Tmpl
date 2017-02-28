@@ -1,6 +1,5 @@
-import 'normalize.css'
 import Vue from 'vue'
-import App from './components/App'
+import App from 'COMPONENTS/App'
 import router from './routers/'
 import './filters/'
 

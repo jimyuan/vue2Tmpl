@@ -1,0 +1,13 @@
+@charset 'utf-8';
+
+footer {
+  @include fixed(bottom 0 left 0 right 0);
+  border-top: 1px solid #ddd;
+  background: #eee;
+  text-align: center;
+  line-height: $bottom-gap;
+
+  > p {
+    margin: 0;
+  }
+}
