@@ -7,20 +7,19 @@ const xhr = ({ url, body = {}, method = 'get' }) => {
   baseURL.webAPI === env.local.webAPI
     ? mockParams = { local: 1, mock: 1, enforce: seed }
     : mockParams = { seed }
+  options = {
+    url, method, baseURL: baseURL.webAPI, withCredentials: true
+  }
   if (method.toLowerCase() === 'get') {
     options = {
-      url,
-      method,
-      params: Object.assign(body, mockParams),
-      baseURL: baseURL.webAPI
+      ...options,
+      params: {...body, ...mockParams}
     }
   } else if (method.toLowerCase() === 'post') {
     options = {
-      url,
-      method,
+      ...options,
       params: mockParams,
-      data: body,
-      baseURL: baseURL.webAPI
+      data: body
     }
   }
   return axios(options)

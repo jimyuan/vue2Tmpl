@@ -1,7 +1,7 @@
 @charset 'utf-8';
 
 .navbar {
-  @include fixed(top 0 left 0 right 0);
+  @include fixed(top 1rem left 0 right 0);
   font-size: 0;
   line-height: 0;
   text-align: center;

@@ -10,7 +10,7 @@ function errHandler (err) {
 }
 
 function warnHandler (res) {
-  console.warn(`[ XHR:Warning ] respCode: ${res.respCode}`)
+  console.warn(`[ XHR:Warning ] respCode: ${res.respCode}; message: ${res.memo}`)
 }
 
 env = {

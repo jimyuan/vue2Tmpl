@@ -15,7 +15,7 @@ const router = new VueRouter({
   }, {
     path: '/list',
     component: resolve => require(['PAGES/List'], resolve),
-    meta: { auth: false }
+    meta: { auth: true }
   }, {
     path: '/login',
     component: resolve => require(['PAGES/Login'], resolve)
@@ -26,7 +26,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.auth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (!userService.data) {
+    if (!userService.isLogin) {
       next({
         path: '/login',
         query: { redirect: to.fullPath }

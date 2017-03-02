@@ -12,7 +12,7 @@
       </thead>
       <tbody v-if="!userData">
         <tr>
-          <td colspan="4" data-row="result">No data yet!</td>
+          <td colspan="4" data-row="result">Empty!</td>
         </tr>
       </tbody>
       <tbody v-else>
@@ -42,9 +42,6 @@ export default {
   },
 
   created () {
-    // this.fetchRemote()
-    // this.secMethod()
-    // this.fetchRemote()
   },
 
   computed: {
@@ -62,7 +59,6 @@ export default {
         gender: 'Female'
       })
       .then(data => {
-        console.log(data)
         this.userData = data.users
         this.fetchStatus = 'Fetch Done!'
       })
