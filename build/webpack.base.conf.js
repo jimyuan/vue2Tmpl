@@ -32,7 +32,9 @@ module.exports = {
       'ASSETS': resolve('src/assets'),
       'COMPONENTS': resolve('src/components'),
       'SERVICES': resolve('src/services'),
-      'PAGES': resolve('src/pages')
+      'PAGES': resolve('src/pages'),
+      'STORE': resolve('src/store'),
+      'ROUTERS': resolve('src/routers')
     }
   },
   module: {

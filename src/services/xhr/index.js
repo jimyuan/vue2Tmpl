@@ -1,13 +1,13 @@
-import xhr from './axios'
+import ajax from './axios'
 
 /**
- * XHR 请求接口定义
- * @param  {String} options.method 请求方法，默认为 get。支持 post、put、patch、delete 等
- * @param  {String} options.url    请求路径，基于 rootPath 地址。例：欲请求 http://localhost:9000/user，仅需要填写 /user 即可
+ * ajax 请求接口定义
+ * @param  {String} options.method 请求方法，默认为 get。
+ * @param  {String} options.url    请求路径，基于全局 baseURL。仅需要填写剩余路径
  * @param  {Object} options.body   请求体。后端 Express 使用 req.body 获取该对象
  * @return {Promise}
  *
- * 使用例子 xhr({ method: 'post', url: 'XXX', body: {Object} })
- * 最简单的例子 xhr({ url: '/user' })
+ * 使用例子 ajax({ method: 'post', url: '/login', body: {Object} })
+ * 最简单的例子 ajax({ url: '/logout' })
  */
-export default xhr
+export default ajax

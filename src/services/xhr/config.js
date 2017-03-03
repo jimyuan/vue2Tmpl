@@ -2,7 +2,7 @@
 // 更多配置请根据业务逻辑自行实现
 
 // 后端 API 地址，最好以 http(s):// 打头
-let env, envPath, baseURL
+let apiEnv, apiRoot
 
 function errHandler (err) {
   console.warn('[ XHR:Failed ] 详情请看控制台')
@@ -13,18 +13,23 @@ function warnHandler (res) {
   console.warn(`[ XHR:Warning ] respCode: ${res.respCode}; message: ${res.memo}`)
 }
 
-env = {
+/**
+ * apiEnv: 各个不同环境所对应的 api
+ *
+ * @type {Object}
+ */
+apiEnv = {
   'local': {
     webAPI: 'http://192.168.1.132:8084'
   },
   'dev': {
-    webAPI: 'http://10.66.1.133:8081/finance-web'
+    webAPI: 'http://10.66.1.133:8081/api'
   },
   'test': {
-    webAPI: 'http://10.66.1.160:8087/finance-web'
+    webAPI: 'http://10.66.1.160:8087/api'
   },
   'pro': {
-    webAPI: 'http://www.ebaoli.com/finance-web'
+    webAPI: 'http://www.ebaoli.com/api'
   }
 }
 
@@ -32,23 +37,23 @@ env = {
 switch (window.location.host) {
   // local env
   case 'localhost:8080':
-    envPath = env.local
+    apiRoot = apiEnv.local
     break
   // dev env
   case '10.66.1.133:8081':
-    envPath = env.dev
+    apiRoot = apiEnv.dev
     break
   // test env
   case '10.66.1.160:8087':
-    envPath = env.test
+    apiRoot = apiEnv.test
     break
   // pro env
   case 'www.ebaoli.com':
-    envPath = env.pro
+    apiRoot = apiEnv.pro
     break
   default:
-    envPath = env.local
+    apiRoot = apiEnv.local
 }
-baseURL = envPath
+// baseURL = envPath
 
-export { errHandler, warnHandler, env, envPath, baseURL }
+export { errHandler, warnHandler, apiEnv, apiRoot }

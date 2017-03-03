@@ -36,15 +36,8 @@ export default {
     return {
       msg: 'LIST PAGE',
       userData: '',
-      remote2: 'no data',
       fetchStatus: 'Fetch!'
     }
-  },
-
-  created () {
-  },
-
-  computed: {
   },
 
   watch: {
@@ -62,17 +55,6 @@ export default {
         this.userData = data.users
         this.fetchStatus = 'Fetch Done!'
       })
-    },
-
-    postRemote () {
-      userService.postMsg({a: 1, b: 2})
-      .then(data => {
-        this.remote = data
-      })
-    },
-
-    secMethod () {
-      this.remote2 = 'show remote 2!'
     }
   }
 }
