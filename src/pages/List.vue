@@ -1,29 +1,31 @@
 <template>
   <div>
     <h2 v-text="msg"></h2>
-    <table class="table table-resp">
-      <thead class="thead-inverse">
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Desc.</th>
-          <th>Create</th>
-        </tr>
-      </thead>
-      <tbody v-if="!userData">
-        <tr>
-          <td colspan="4" data-row="result">Empty!</td>
-        </tr>
-      </tbody>
-      <tbody v-else>
-        <tr v-for="user in userData">
-          <td v-text="user.firstName + ' ' + user.lastName" data-row="Name"></td>
-          <td v-text="user.email" data-row="Email"></td>
-          <td v-text="user.description" data-row="Desc."></td>
-          <td v-text="user.createTime" data-row="Create"></td>
-        </tr>
-      </tbody>
-    </table>
+    <transition name="fade">
+      <table class="table table-resp">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Desc.</th>
+            <th>Create</th>
+          </tr>
+        </thead>
+        <tbody v-if="!userData">
+          <tr>
+            <td colspan="4" data-row="result">Empty!</td>
+          </tr>
+        </tbody>
+        <tbody v-else>
+          <tr v-for="user in userData">
+            <td v-text="user.firstName + ' ' + user.lastName" data-row="Name"></td>
+            <td v-text="user.email" data-row="Email"></td>
+            <td v-text="user.description" data-row="Desc."></td>
+            <td v-text="user.createTime" data-row="Create"></td>
+          </tr>
+        </tbody>
+      </table>
+    </transition>
     <button class="btn btn-block btn-primary" @click="fetchUser" v-text="fetchStatus"></button>
   </div>
 </template>

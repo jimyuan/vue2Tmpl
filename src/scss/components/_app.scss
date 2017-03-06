@@ -1,0 +1,28 @@
+@charset 'utf-8';
+
+.child-view {
+  @include absolute(top 0 left 0 right 0);
+  padding: $spacer * 5 20px $spacer * 4;
+  transition: transform .5s cubic-bezier(0.2, 0.6, 0.6, 1.5);
+}
+
+.slide-left-enter,
+.slide-right-leave-active {
+  opacity: 0;
+  transform: translate(100%, 0);
+}
+
+.slide-left-leave-active,
+.slide-right-enter {
+  opacity: 0;
+  transform: translate(-100%, 0);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s ease;
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}

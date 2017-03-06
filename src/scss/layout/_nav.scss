@@ -2,6 +2,7 @@
 
 .navbar {
   @include fixed(top 1rem left 0 right 0);
+  z-index: z('navbar');
   font-size: 0;
   line-height: 0;
   text-align: center;

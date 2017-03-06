@@ -1,3 +1,10 @@
 @charset "utf-8";
 
 $bottom-gap: 50px !default;
+
+$z-layers:(
+  'userbar': 20,
+  'navbar': 20,
+  'footer': 20,
+  'default': 1
+);

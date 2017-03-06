@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-.view {
-  padding: 20px;
-}
-
 @for $h from 1 through 6 {
   h#{$h} {
     margin: 0;
