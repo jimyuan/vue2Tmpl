@@ -144,7 +144,9 @@ module.exports = {
     "no-trailing-spaces": 2,
     "no-extra-parens": [2, "functions"],
     "no-underscore-dangle": 0,
-    "one-var": [2, "never"],
+    "one-var": [2, {
+      "initialized": "never"
+    }],
     "padded-blocks": [2, "never"],
     "semi": [2, "never"],
     "semi-spacing": [2, {
