@@ -30,7 +30,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name]' + chunkhash + '.js'),
-    chunkFilename: utils.assetsPath('js/[id]' + chunkhash + '.js')
+    chunkFilename: utils.assetsPath('js/[name]' + chunkhash + '.js')
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -87,6 +87,13 @@ var webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     }),
+    // if a module is imported by 2 times, put it in libs.js
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'libs',
+      minChunks: function (module, count) {
+        return count >= 2
+      }
+    }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
@@ -94,7 +101,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
   ]
 })
 
