@@ -22,7 +22,7 @@ class UserService {
    * @return {Promise}
    */
   login (body) {
-    return ajax({ url: '/login', method: 'post', body })
+    return ajax({ url: api.login, method: 'post', body })
   }
 
   /**

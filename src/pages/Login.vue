@@ -47,8 +47,7 @@ export default {
         if (token) {
           this.$store.commit(types.LOGIN, token)
           this.$store.commit(types.USER, user)
-          this.$router.push({
-            path: this.$route.query.redirect })
+          this.$router.push({ path: this.$route.query.redirect })
         }
       })
     }
