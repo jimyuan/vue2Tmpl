@@ -1,5 +1,8 @@
 # CHANGE LOG
 
+## 2017-08-28
+- 升级 Bootstrap4 Beta，修改部分 scss 文件变量名
+
 ## 2017-05-05
 - 升级部分 npm 依赖包
 - 改进 webpack 打包策略

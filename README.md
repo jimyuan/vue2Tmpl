@@ -35,3 +35,15 @@ cnpm run build
 # 生成编译打包分析报告
 cnpm run build --report
 ```
+
+## Additional
+本项目若要完整运行，需在后台独立开启 API Server，这里写了一个简单的 Mock，供模拟测试用；Mock 项目地址：`git@github.com:czcg/proxy.git`，运行：
+
+``` bash
+# install dependencies
+# 安装依赖（仅首次运行需执行）
+cnpm install
+
+# 启动 Mock Server
+node start/demo
+```
