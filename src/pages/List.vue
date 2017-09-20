@@ -52,8 +52,7 @@ export default {
       userService.fetch({
         username: 'Jean',
         gender: 'Female'
-      })
-      .then(data => {
+      }).then(data => {
         this.userData = data.users
         this.fetchStatus = 'Fetch Done!'
       })

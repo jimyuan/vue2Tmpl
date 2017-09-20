@@ -1,6 +1,9 @@
 @charset "utf-8";
 
 $bottom-gap: 50px !default;
+$white: #fff;
+$spacer: 20px;
+$table-inverse-bg: invert($white);
 
 $z-layers:(
   'userbar': 20,

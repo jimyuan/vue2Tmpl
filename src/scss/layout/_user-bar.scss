@@ -3,7 +3,7 @@
 .userbar {
   @include fixed(top 0 left 0 right 0);
   z-index: z('userbar');
-  background: theme-color('danger');
+  background: $brand-danger;
   font-size: 0.75rem;
   line-height: 1rem;
   padding: 0 1em;
@@ -19,6 +19,6 @@
   }
 
   &.active {
-    background: theme-color('success');
+    background: $brand-success;
   }
 }

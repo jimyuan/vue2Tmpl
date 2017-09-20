@@ -3,9 +3,12 @@
 // Scss 全局默认变量
 @import 'abstracts/variables';
 
+// Bootstrap 3.3.7 import
+@import './vendor/bs3.scss';
+
 // Bootstrap 4 Alpha 6 reboot
-@import '~bootstrap/scss/bootstrap-reboot';
-@import 'vendor/bs4-alpha6';
+// @import '~bootstrap/scss/bootstrap-reboot';
+// @import 'vendor/bs4-alpha6';
 
 // 自定义部分
 @import 'abstracts/functions';
