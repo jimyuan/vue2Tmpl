@@ -8,20 +8,26 @@ Vue.use(VueRouter)
 
 const ls = new WsCache()
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes: [{
     path: '/',
     redirect: '/home'
   }, {
+    // 首页
     path: '/home',
     component: resolve => require(['PAGES/Home'], resolve)
   }, {
+    // 列表页，需登录
     path: '/list',
     meta: { auth: true },
     component: resolve => require(['PAGES/List'], resolve)
   }, {
+    // 登录页
     path: '/login',
     component: resolve => require(['PAGES/Login'], resolve)
+  }, {
+    path: '/upload',
+    component: resolve => require(['PAGES/Upload'], resolve)
   }]
 })
 

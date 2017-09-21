@@ -3,6 +3,7 @@ import App from 'COMPONENTS/App'
 import router from 'ROUTERS/'
 import store from 'STORE/store'
 import './filters/'
+import 'babel-polyfill'
 
 Vue.config.productionTip = false
 
@@ -11,6 +12,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  template: '<App/>',
-  components: { App }
+  render: h => h(App)
 })

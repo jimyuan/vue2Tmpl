@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'hello',
   data () {
     return {
       time: Date.now()

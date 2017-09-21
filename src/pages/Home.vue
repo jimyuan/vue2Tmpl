@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>{{ msg }}</h2>
+    <img src="../assets/logo.png" alt="">
     <p v-text="time"></p>
   </div>
 </template>
@@ -9,7 +10,8 @@
 export default {
   data () {
     return {
-      msg: 'HOME PAGE'
+      msg: 'HOME PAGE',
+      pic: '../assets/logo.png'
     }
   },
 

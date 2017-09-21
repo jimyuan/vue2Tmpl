@@ -7,3 +7,16 @@ html {
 body {
   /* padding: $spacer * 4 0; */
 }
+
+.file-uploads {
+  color: #ddd;
+  line-height: 2;
+  border: 1px solid #ccc;
+  padding: 0 0.5em;
+  cursor: pointer;
+}
+
+.thumb-pic {
+  display: inline-block;
+  height: 50px;
+}
