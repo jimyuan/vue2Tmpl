@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h2>{{ msg }}</h2>
     <form action="" class="form-horizontal">
       <div class="form-group">
@@ -8,31 +8,29 @@
           <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
         </div>
       </div>
-      <div class="from-group">
-        <label for="f2" class="col-xs-3 control-label">upload</label>
+      <div class="form-group">
+        <label class="col-xs-3 control-label">正面</label>
         <div class="col-xs-9">
-          <input type="file" name="f2" id="f2" class="form-control">
+          <img :src="imgData" class="thumb-pic">
+          <input type="file" name="f1" id="f1" class="form-control" @change="selectFile($event, 'sfzFront')">
         </div>
       </div>
       <div class="form-group">
-        <label for="exampleInputFile" class="col-xs-3 control-label">File input</label>
+        <label class="col-xs-3 control-label">反面</label>
         <div class="col-xs-9">
-          <img :src="imgData[0]" class="thumb-pic">
-          <file-upload ref="upload1" v-model="files[0]" :extensions="extensions" :accept="accept" :size="size" :data="bodyData" :post-action="postAction" @input-filter="handlePic">
-            选择文件
-          </file-upload>
+          <img :src="imgData" class="thumb-pic">
+          <input type="file" name="f2" id="f2" class="form-control" @change="selectFile($event, 'sfzBack')">
         </div>
       </div>
       <div class="form-group">
-        <label for="exampleInputFile" class="col-xs-3 control-label">File input</label>
-        <div class="col-xs-9">
-          <img :src="imgData[1]" class="thumb-pic">
-          <file-upload ref="upload2" v-model="files[1]" :extensions="extensions" :accept="accept" :size="size" :data="bodyData" :post-action="postAction" @input-filter="handlePic">
-            选择文件
-          </file-upload>
-        </div>
-      </div>
-      <div class="form-group">
+        <file-upload ref="upload" v-model="files"
+          :extensions="upOpt.extensions"
+          :accept="upOpt.accept"
+          :size="upOpt.size"
+          :post-action="upOpt.postAction"
+          :multiple="upOpt.multiple"
+          :data="bodyData"
+          @input-filter="handlePic"></file-upload>
         <div class="col-xs-offset-3 col-xs-9">
           <button class="btn" v-show="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.active = true">提交</button>
         </div>
@@ -47,18 +45,33 @@ export default {
   data () {
     return {
       msg: 'UPLOAD',
-      imgData: [false, false],
-      files: [[], []],
-      accept: 'image/png,image/gif,image/jpeg,image/webp',
-      size: 1024 * 1024 * 4,
-      extensions: /\.(gif|jpe?g|png|webp)$/i,
+      imgData: false,
+      files: [],
+      upOpt: {
+        accept: 'image/png,image/gif,image/jpeg,image/webp',
+        size: 1024 * 1024 * 4,
+        extensions: /\.(gif|jpe?g|png|webp)$/i,
+        postAction: './post.php',
+        multiple: true
+      },
       bodyData: { id: 1234 },
-      postAction: './post.php'
+      fileQuery: []
     }
   },
   mounted () {
   },
   methods: {
+    selectFile (e, matter) {
+      const newFile = e.target.files[0]
+      let URL = window.URL || window.webkitURL
+
+      this.fileQuery.push(matter)
+      this.$refs.upload.addInputFile(e.target)
+      if (URL && URL.createObjectURL) {
+        newFile.blob = URL.createObjectURL(newFile)
+        this.imgData = newFile.blob
+      }
+    },
     handlePic (newFile, oldFile) {
       if (newFile && !oldFile) {
         // // 过滤系疼文件 or 隐藏文件
@@ -70,13 +83,12 @@ export default {
         //   return prevent()
         // }
         // 创建 blob 字段
-        console.log(newFile)
-        newFile.blob = ''
-        let URL = window.URL || window.webkitURL
-        if (URL && URL.createObjectURL) {
-          newFile.blob = URL.createObjectURL(newFile.file)
-          this.imgData1 = newFile.blob
-        }
+        // newFile.blob = ''
+        // let URL = window.URL || window.webkitURL
+        // if (URL && URL.createObjectURL) {
+        //   newFile.blob = URL.createObjectURL(newFile.file)
+        //   this.imgData = newFile.blob
+        // }
       }
     }
   },

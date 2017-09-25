@@ -1,5 +1,9 @@
 # CHANGE LOG
 
+## 2017-09-25
+- 为兼容 IE9+，添加 bable-polyfill
+- 添加 file uploade demo
+
 ## 2017-09-20
 - 为兼容需求，CSS framework 还是设定为 v3.3.7
 - 升级到 Vue v2.4.4，其他开发环境包也一并升级
