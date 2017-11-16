@@ -1,5 +1,9 @@
 # CHANGE LOG
 
+## 2017-11-16
+- 修改了 eslint 验证规则
+- 改用 babel-preset-env
+
 ## 2017-09-25
 - 为兼容 IE9+，添加 bable-polyfill
 - 添加 file uploade demo
