@@ -1,15 +1,19 @@
 import axios from 'axios'
 import store from 'STORE/store'
-import * as types from 'STORE/types'
 import router from 'ROUTERS/'
-import { errHandler, warnHandler, apiRoot } from './config'
+import { apiRoot } from './config'
 
 /**
- * 登录跳转方法
+ * 登录跳转方法，此方法针对在需登录验证后才能进入的页面，
+ * 当在该页面停留时间过久，token 失效后再次发送请求时拦截该 request 并跳转到登录页
  *
+ * 1. 人工登出，清除之前的登录痕迹
+ * 2. 跳转到登录页
  */
 function goLogin () {
-  store.commit(types.LOGOUT)
+  // 1
+  store.commit('logout')
+  // 2
   router.replace({
     path: '/login',
     query: { redirect: router.currentRoute.fullPath }
@@ -20,21 +24,14 @@ function goLogin () {
  * axios 全局 options
  */
 axios.defaults.baseURL = apiRoot.webAPI
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = false
 
 /**
  * Ajax response 拦截器
  */
 axios.interceptors.response.use(
   response => response.data,
-  error => {
-    errHandler(error)
-    if (error.response) {
-      // 401 清除 token 信息并跳转到登录页面
-      error.response.status === 401 && goLogin()
-    }
-    return Promise.reject(error)
-  }
+  error => Promise.reject(error)
 )
 
 /**
@@ -43,8 +40,9 @@ axios.interceptors.response.use(
  */
 axios.interceptors.request.use(
   config => {
-    if (store.state.token) {
-      config.headers['Credit-Token'] = `token ${store.state.token}`
+    const token = store.state.token
+    if (token && !config.headers['Credit-Token']) {
+      config.headers['Credit-Token'] = token
     }
     return config
   },
@@ -59,17 +57,9 @@ const xhr = ({ url, body = {}, method = 'get' }) => {
   const mockParams = apiRoot.webAPI.indexOf(':8084') > -1
     ? { local: 1, mock: 1, enforce: seed }
     : { seed }
-  switch (method.toLowerCase()) {
-    case 'get':
-      Object.assign(options, {
-        params: {...body, ...mockParams}
-      })
-      break
-    case 'post':
-      Object.assign(options, { params: mockParams, data: body })
-      break
-    default:
-  }
+  method === 'get'
+    ? Object.assign(options, { params: {...mockParams, ...body} })
+    : Object.assign(options, { params: mockParams, data: body })
   /**
    * response json demo:
    *
@@ -85,12 +75,11 @@ const xhr = ({ url, body = {}, method = 'get' }) => {
         case 0:
           resolve(response.data)
           break
-        // 需登录，跳转到登录页 (此处 respCode 取值应与后端协商，这里仅仅举个例子)
         case 100:
           goLogin()
           break
         default:
-          reject(warnHandler(response))
+          reject(response.memo)
       }
     })
   })

@@ -1,0 +1,25 @@
+@charset 'utf-8';
+
+.nav-bar {
+  position: relative;
+}
+
+.logo {
+  height: 40px;
+}
+
+.el-menu {
+  background: url('../assets/logo.png') no-repeat 2em center / auto 70%;
+  padding-left: 5em;
+  transition: background-color 0.5s;
+}
+
+.login-user {
+  @include absolute(right 2em top 0 bottom 0);
+  line-height: 60px;
+  font-size: 0.8em;
+}
+
+.login-status {
+  background-color: rgb(226, 255, 210);
+}

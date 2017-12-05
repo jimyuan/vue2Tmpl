@@ -4,26 +4,21 @@
  * @return {String/Number}
  */
 let zerofill = val => val >= 10 ? val : `0${val}`
-/* 相当于：
-  var zerofill = function (val) {
-    return val >=10 ? val : '0' + val
-  };
-*/
 
 /**
  * 格式化时间
  * @param  {Number} time 时间戳
- * @param  {Number} type 格式化类型
- * @return {String}
+ * @param  {Number} type 格式化类型，默认类型 2
+ * @return {String} 默认格式：2015-01-05
  */
-export default (time, type) => {
-  let date = new Date(time)
-  let year = date.getFullYear()
-  let month = date.getMonth() + 1
-  let day = date.getDate()
-  let hours = date.getHours()
-  let minutes = date.getMinutes()
-  let second = date.getSeconds()
+export default (time, type = 2) => {
+  const date = new Date(time)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const second = date.getSeconds()
 
   switch (type) {
     case 0: // 01-05

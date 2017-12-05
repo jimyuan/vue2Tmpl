@@ -2,8 +2,13 @@
 
 $bottom-gap: 50px !default;
 $white: #fff;
+$link-color: rgb(112, 150, 245);
+$brand-danger: rgb(255, 150, 150);
+$brand-success: rgb(144, 244, 166);
+$table-border-color: #ddd;
 $spacer: 20px;
 $table-inverse-bg: invert($white);
+$font-family-monospace: monospace;
 
 $z-layers:(
   'userbar': 20,

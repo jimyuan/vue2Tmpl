@@ -1,5 +1,12 @@
 # CHANGE LOG
 
+## 2017-12-05
+- 众多代码重写，因此脚手架版本升级到 v2.0.0
+- 升级 Vuejs 版本至 v2.5.0+
+- 升级各开发依赖包至最新版本
+- 暂时去掉 bable-polyfill
+- 按照 Element-ui 重新写 demo
+
 ## 2017-11-16
 - 修改了 eslint 验证规则
 - 改用 babel-preset-env
