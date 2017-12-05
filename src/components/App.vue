@@ -1,36 +1,19 @@
 <template>
-  <div id="app">
-    <Userbar></Userbar>
-    <Navbar></Navbar>
-    <transition :name="transitionName">
+  <section id="app">
+    <nav-bar></nav-bar>
+    <transition name="fade" mode="out-in">
       <router-view class="child-view"></router-view>
     </transition>
-    <Footinfo></Footinfo>
-  </div>
+    <foot-info></foot-info>
+  </section>
 </template>
 
 <script>
-import Userbar from './Userbar'
-import Navbar from './Navbar'
-import Footinfo from './Footer'
+import NavBar from './NavBar'
+import FootInfo from './FootInfo'
 
 export default {
-  data () {
-    return {
-      // transitionName: 'slide-left'
-      transitionName: 'fade'
-    }
-  },
-  watch: {
-    '$route' (to, from) {
-      if (this.transitionName !== 'fade') {
-        const toDepth = to.path.split('/').length
-        const fromDepth = from.path.split('/').length
-        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-      }
-    }
-  },
-  components: { Userbar, Navbar, Footinfo }
+  components: { NavBar, FootInfo }
 }
 </script>
 

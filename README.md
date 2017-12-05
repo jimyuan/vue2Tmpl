@@ -4,8 +4,8 @@
 > - Webpack2
 > - ES6
 > - Sass
-> - Vue2
-> - Vue-resource
+> - Vue2.5+
+> - Vue-Router
 > - Vuex
 >
 > 安装及运行步骤见下方示例，详细使用见 Gitlab wiki（only internal）。

@@ -1,32 +1,31 @@
 <template>
   <div>
     <h2 v-text="msg"></h2>
-    <transition name="fade">
-      <table class="table table-resp">
-        <thead class="thead-inverse">
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Desc.</th>
-            <th>Create</th>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Desc.</th>
+          <th>Create</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template v-if="userData.length>0">
+          <tr v-for="user of userData">
+            <td v-text="user.firstName+' '+user.lastName"></td>
+            <td v-text="user.email"></td>
+            <td v-text="user.description"></td>
+            <td v-text="user.createTime"></td>
           </tr>
-        </thead>
-        <tbody v-if="!userData">
-          <tr>
-            <td colspan="4" data-row="result">Empty!</td>
-          </tr>
-        </tbody>
-        <tbody v-else>
-          <tr v-for="user in userData">
-            <td v-text="user.firstName + ' ' + user.lastName" data-row="Name"></td>
-            <td v-text="user.email" data-row="Email"></td>
-            <td v-text="user.description" data-row="Desc."></td>
-            <td v-text="user.createTime" data-row="Create"></td>
-          </tr>
-        </tbody>
-      </table>
-    </transition>
-    <button class="btn btn-block btn-primary" @click="fetchUser" v-text="fetchStatus"></button>
+        </template>
+        <tr v-else>
+          <td colspan="4" style="text-align: center;">Empty Data!</td>
+        </tr>
+      </tbody>
+    </table>
+    <el-button type="primary" size="small" plain  @click="fetchUser" v-text="fetchStatus"></el-button>
+    <el-button size="small" plain @click="resetFetch">Reset</el-button>
   </div>
 </template>
 
@@ -37,7 +36,8 @@ export default {
   data () {
     return {
       msg: 'LIST PAGE',
-      userData: '',
+      userData: [],
+      emptyText: 'Empty Data!',
       fetchStatus: 'Fetch!'
     }
   },
@@ -55,7 +55,13 @@ export default {
       }).then(data => {
         this.userData = data.users
         this.fetchStatus = 'Fetch Done!'
+      }).catch(error => {
+        console.log(`error: ${error}`)
       })
+    },
+    resetFetch () {
+      this.userData = []
+      this.fetchStatus = 'Fetch!'
     }
   }
 }

@@ -54,6 +54,4 @@ switch (window.location.host) {
   default:
     apiRoot = apiEnv.local
 }
-// baseURL = envPath
-
-export { errHandler, warnHandler, apiEnv, apiRoot }
+export { errHandler, warnHandler, apiRoot }

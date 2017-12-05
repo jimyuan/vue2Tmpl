@@ -1,6 +1,6 @@
 <template>
-  <footer>
-    <p>Update: {{ time | dateTimeFormatter }}</p>
+  <footer class="foot-info">
+    <p>Update: {{ time | dateTimeFormatter(3) }}</p>
   </footer>
 </template>
 

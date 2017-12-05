@@ -1,8 +1,7 @@
 <template>
   <div>
     <h2>{{ msg }}</h2>
-    <img src="../assets/logo.png" alt="">
-    <p v-text="time"></p>
+    <img src="../assets/f-35.jpg" class="kv">
   </div>
 </template>
 
@@ -10,18 +9,8 @@
 export default {
   data () {
     return {
-      msg: 'HOME PAGE',
-      pic: '../assets/logo.png'
+      msg: 'HOME PAGE'
     }
-  },
-
-  computed: {
-    time () {
-      return this.$parent.time
-    }
-  },
-
-  created () {
   }
 }
 </script>
