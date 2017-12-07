@@ -1,7 +1,7 @@
 const api = {
-  list: '/start',
-  login: '/login',
-  logout: '/logout'
+  list: '/api/start',
+  login: '/api/login',
+  logout: '/api/logout'
 }
 
 export default api

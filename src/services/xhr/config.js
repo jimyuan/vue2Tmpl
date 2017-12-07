@@ -36,7 +36,7 @@ apiEnv = {
 /* === 判断当前为开发环境 === */
 switch (window.location.host) {
   // local env
-  case 'localhost:8080':
+  case '0.0.0.0:8080':
     apiRoot = apiEnv.local
     break
   // dev env
