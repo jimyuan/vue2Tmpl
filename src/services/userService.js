@@ -8,21 +8,21 @@ class UserService {
   /**
    * 获取用户列表
    *
-   * @param {Object} 传参，eg: { id: 123 }
+   * @param {Object} data 传参，eg: { id: 123 }
    * @return {Promise}
    */
-  fetch (body = {}) {
-    return ajax({ url: api.list, body })
+  fetch (data = {}) {
+    return ajax({ url: api.list, data })
   }
 
   /**
    * 登录接口
    *
-   * @param  {Object} eg: {usr: 'jim', pwd: 'password'}
+   * @param  {Object} data {usr: 'jim', pwd: 'password'}
    * @return {Promise}
    */
-  login (body) {
-    return ajax({ url: api.login, method: 'post', body })
+  login (data) {
+    return ajax({ url: api.login, method: 'post', data })
   }
 
   /**

@@ -49,15 +49,11 @@ export default {
   methods: {
     fetchUser () {
       this.fetchStatus = 'Fetching...'
-      userService.fetch({
-        username: 'Jean',
-        gender: 'Female'
-      }).then(data => {
-        this.userData = data.users
-        this.fetchStatus = 'Fetch Done!'
-      }).catch(error => {
-        console.log(`error: ${error}`)
-      })
+      userService.fetch({ username: 'Jean', ender: 'Female' })
+        .then(data => {
+          this.userData = data.users
+          this.fetchStatus = 'Fetch Done!'
+        })
     },
     resetFetch () {
       this.userData = []

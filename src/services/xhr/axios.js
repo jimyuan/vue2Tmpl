@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from 'STORE/store'
 import router from 'ROUTERS/'
-import { apiRoot } from './config'
+import apiRoot from './config'
 
 /**
  * 登录跳转方法，此方法针对在需登录验证后才能进入的页面，
@@ -49,7 +49,8 @@ axios.interceptors.request.use(
   error => Promise.reject(error)
 )
 
-const xhr = ({ url, body = {}, method = 'get' }) => {
+// export default Promise Object
+const xhr = ({ url, data = {}, method = 'get' }) => {
   const seed = +new Date()
   const options = { url, method }
   // 本地起的 mock proxy 默认是 8084 端口，需特殊参数餐能申请到 mock 数据
@@ -58,8 +59,8 @@ const xhr = ({ url, body = {}, method = 'get' }) => {
     ? { local: 1, mock: 1, enforce: seed }
     : { seed }
   method === 'get'
-    ? Object.assign(options, { params: {...mockParams, ...body} })
-    : Object.assign(options, { params: mockParams, data: body })
+    ? Object.assign(options, { params: {...mockParams, ...data} })
+    : Object.assign(options, { params: mockParams, data })
   /**
    * response json demo:
    *
@@ -70,20 +71,24 @@ const xhr = ({ url, body = {}, method = 'get' }) => {
    * }
    */
   return new Promise((resolve, reject) => {
-    axios(options).then(response => {
-      switch (+response.respCode) {
-        case 0:
-          resolve(response.data)
-          break
-        case 100:
-          goLogin()
-          break
-        default:
-          reject(response.memo)
-      }
-    })
+    axios(options)
+      .then(response => {
+        switch (+response.respCode) {
+          case 0:
+            resolve(response.data)
+            break
+          case 100:
+            goLogin()
+            break
+          default:
+            console.warn(`[ XHR:Warning ] respCode: ${response.respCode}; message: ${response.memo}`)
+            reject(response.memo)
+        }
+      }).catch(error => {
+        console.error(`[ XHR:Failed ]: ${error}`)
+        return reject(error)
+      })
   })
 }
 
-// export default Promise Object
 export default xhr

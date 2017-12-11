@@ -1,17 +1,6 @@
-// 此处配置 根访问路径 以及 全局错误处理
-// 更多配置请根据业务逻辑自行实现
+// 此处配置不同环境下后端 api 同前端访问页面的映射
 
-// 后端 API 地址，最好以 http(s):// 打头
 let apiEnv, apiRoot
-
-function errHandler (err) {
-  console.warn('[ XHR:Failed ] 详情请看控制台')
-  console.error(err)
-}
-
-function warnHandler (res) {
-  console.warn(`[ XHR:Warning ] respCode: ${res.respCode}; message: ${res.memo}`)
-}
 
 /**
  * apiEnv: 各个不同环境所对应的 api
@@ -54,4 +43,4 @@ switch (window.location.host) {
   default:
     apiRoot = apiEnv.local
 }
-export { errHandler, warnHandler, apiRoot }
+export default apiRoot
