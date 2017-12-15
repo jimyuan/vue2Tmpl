@@ -24,8 +24,8 @@ export default {
     return {
       loginMsg: 'LOGIN PAGE',
       user: {
-        usr: '',
-        pwd: ''
+        usr: 'user',
+        pwd: '1234'
       },
       placeHoler: {
         usr: '用户名',

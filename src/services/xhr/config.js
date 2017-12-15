@@ -17,28 +17,30 @@ apiEnv = {
   'test': {
     webAPI: 'http://10.66.1.160:8087/api'
   },
-  'pro': {
+  'prod': {
     webAPI: 'http://www.ebaoli.com/api'
   }
 }
 
-/* === 判断当前为开发环境 === */
+/* === 判断当前运行环境 === */
 switch (window.location.host) {
   // local env
   case '0.0.0.0:8080':
+  case 'localhost:8080':
+  case '127.0.0.0:8080':
     apiRoot = apiEnv.local
     break
   // dev env
-  case '10.66.1.133:8081':
+  case 'dev.env.com':
     apiRoot = apiEnv.dev
     break
   // test env
-  case '10.66.1.160:8087':
+  case 'test.env.com':
     apiRoot = apiEnv.test
     break
-  // pro env
-  case 'www.ebaoli.com':
-    apiRoot = apiEnv.pro
+  // prod env
+  case 'prod.env.com':
+    apiRoot = apiEnv.prod
     break
   default:
     apiRoot = apiEnv.local

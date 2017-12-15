@@ -4,16 +4,16 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Desc.</th>
-          <th>Create</th>
+          <th v-for="ts of tabSort" v-text="ts"></th>
         </tr>
       </thead>
       <tbody>
         <template v-if="userData.length>0">
-          <tr v-for="user of userData">
-            <td v-text="user.firstName+' '+user.lastName"></td>
+          <tr v-for="user of userData" :key="user.id">
+            <td>
+              <input type="checkbox" name="chkUser" :value="user.id" v-model="userIds">
+            </td>
+            <td v-text="`${user.firstName} ${user.lastName}`"></td>
             <td v-text="user.email"></td>
             <td v-text="user.description"></td>
             <td v-text="user.createTime"></td>
@@ -36,7 +36,9 @@ export default {
   data () {
     return {
       msg: 'LIST PAGE',
+      tabSort: [],
       userData: [],
+      userIds: [],
       emptyText: 'Empty Data!',
       fetchStatus: 'Fetch!'
     }
@@ -49,10 +51,18 @@ export default {
   methods: {
     fetchUser () {
       this.fetchStatus = 'Fetching...'
-      userService.fetch({ username: 'Jean', ender: 'Female' })
-        .then(data => {
-          this.userData = data.users
+      const req = [
+        userService.getSort(),
+        userService.fetch({ username: 'Jean', ender: 'Female' })
+      ]
+      Promise.all(req)
+        .then(([data1, data2]) => {
+          this.tabSort = ['', ...data1.sort]
+          this.userData = data2.users
           this.fetchStatus = 'Fetch Done!'
+        })
+        .catch(() => {
+          this.fetchStatus = 'Fetch Error!'
         })
     },
     resetFetch () {

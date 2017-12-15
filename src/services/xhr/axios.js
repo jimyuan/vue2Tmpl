@@ -52,15 +52,10 @@ axios.interceptors.request.use(
 // export default Promise Object
 const xhr = ({ url, data = {}, method = 'get' }) => {
   const seed = +new Date()
-  const options = { url, method }
-  // 本地起的 mock proxy 默认是 8084 端口，需特殊参数餐能申请到 mock 数据
-  // 详见 https://github.com/czcg/proxy 项目
-  const mockParams = apiRoot.webAPI.indexOf(':8084') > -1
-    ? { local: 1, mock: 1, enforce: seed }
-    : { seed }
+  const options = { url, method, params: { seed } }
   method === 'get'
-    ? Object.assign(options, { params: {...mockParams, ...data} })
-    : Object.assign(options, { params: mockParams, data })
+    ? Object.assign(options, { params: { ...data, seed } })
+    : Object.assign(options, { data })
   /**
    * response json demo:
    *
@@ -86,7 +81,7 @@ const xhr = ({ url, data = {}, method = 'get' }) => {
         }
       }).catch(error => {
         console.error(`[ XHR:Failed ]: ${error}`)
-        return reject(error)
+        reject(error)
       })
   })
 }

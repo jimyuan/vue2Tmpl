@@ -16,6 +16,15 @@ class UserService {
   }
 
   /**
+   * 获取表格表头
+   *
+   * @return {Promise}
+   */
+  getSort () {
+    return ajax({ url: api.sort })
+  }
+
+  /**
    * 登录接口
    *
    * @param  {Object} data {usr: 'jim', pwd: 'password'}
