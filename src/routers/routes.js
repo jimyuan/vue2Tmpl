@@ -1,7 +1,7 @@
 const Home = () => import('PAGES/Home')
 const List = () => import('PAGES/List')
 const Login = () => import('PAGES/Login')
-const Upload = () => import('PAGES/Upload')
+const Table = () => import('PAGES/Table')
 export default [
   {
     path: '/',
@@ -21,7 +21,7 @@ export default [
     component: Login
   }, {
     // 上传页
-    path: '/upload',
-    component: Upload
+    path: '/table',
+    component: Table
   }
 ]
