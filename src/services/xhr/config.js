@@ -1,15 +1,13 @@
-// 此处配置不同环境下后端 api 同前端访问页面的映射
-
-let apiEnv, apiRoot
+let apiRoot
 
 /**
- * apiEnv: 各个不同环境所对应的 api
+ * apiEnv: 各个不同环境所对应的 api 地址（公共部分）
  *
  * @type {Object}
  */
-apiEnv = {
+const apiEnv = {
   'local': {
-    webAPI: 'http://localhost:8084'
+    webAPI: 'http://localhost:8084/api'
   },
   'dev': {
     webAPI: 'http://10.66.1.133:8081/api'
@@ -22,7 +20,10 @@ apiEnv = {
   }
 }
 
-/* === 判断当前运行环境 === */
+/**
+ * 判断当前运行环境
+ * 将当前所对应的 api 地址赋予 apiRoot
+ */
 switch (window.location.host) {
   // local env
   case '0.0.0.0:8080':

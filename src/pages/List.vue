@@ -56,9 +56,9 @@ export default {
         userService.fetch({ username: 'Jean', ender: 'Female' })
       ]
       Promise.all(req)
-        .then(([data1, data2]) => {
-          this.tabSort = ['', ...data1.sort]
-          this.userData = data2.users
+        .then(([sortData, userList]) => {
+          this.tabSort = ['', ...sortData.sort]
+          this.userData = userList.users
           this.fetchStatus = 'Fetch Done!'
         })
         .catch(() => {
@@ -69,6 +69,9 @@ export default {
       this.userData = []
       this.fetchStatus = 'Fetch!'
     }
+  },
+  created () {
+    this.fetchUser()
   }
 }
 </script>

@@ -1,7 +1,7 @@
-const Home = () => import('PAGES/Home')
-const List = () => import('PAGES/List')
-const Login = () => import('PAGES/Login')
-const Table = () => import('PAGES/Table')
+const Home = () => import(/* webpackChunkName: "home" */ 'PAGES/Home')
+const List = () => import(/* webpackChunkName: "list" */ 'PAGES/List')
+const Login = () => import(/* webpackChunkName: "login" */ 'PAGES/Login')
+const Table = () => import(/* webpackChunkName: "table" */ 'PAGES/Table')
 export default [
   {
     path: '/',
