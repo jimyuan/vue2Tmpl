@@ -20,7 +20,7 @@ export default [
     path: '/login',
     component: Login
   }, {
-    // 上传页
+    // 表格
     path: '/table',
     component: Table
   }

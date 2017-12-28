@@ -53,7 +53,7 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: true,
+    cssSourceMap: true
   },
 
   build: {
@@ -86,6 +86,10 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report,
     // 编译打包时设置 static 资源 hash 指纹长度， 0 为不需要打 hash
-    hashMark: 0
+    hashMark: 0,
+    // 指定是否需要在编译生成所有资源文件的同时生成一个压缩包
+    zipPackage: false,
+    // 是否需要在生产环境中去掉 console 语句
+    dropConsole: false
   }
 }

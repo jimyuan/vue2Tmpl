@@ -47,3 +47,8 @@ cnpm install
 # 启动 Mock Server
 node mock/demo
 ```
+
+## Browse
+在开发状态下，当你用 `npm start` 命令启动项目时，就可以在 <http://0.0.0.0:8080/> 下浏览及调试项目了。
+
+在执行完 `npm run build` 后，webpack 在 dist 目录下编译生成了一个生产环境下的最终代码，此时也可以利用启动的 webserver 在 <http://0.0.0.0:8080/dist> 下对编译完的代码进行查看检测。

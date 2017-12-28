@@ -12,10 +12,12 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const env = require('../config/prod.env')
 const hashMark = config.build.hashMark
-let chunkhash = '', contenthash = ''
-if(hashMark) {
+let chunkhash, contenthash
+if (hashMark) {
   chunkhash = `.[chunkhash:${hashMark}]`
   contenthash = `.[contenthash:${hashMark}]`
+} else {
+  chunkhash = contenthash = ''
 }
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -39,7 +41,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
-          warnings: false
+          warnings: false,
+          drop_console: config.build.dropConsole
         }
       },
       sourceMap: config.build.productionSourceMap,
@@ -51,7 +54,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       // set the following option to `true` if you want to extract CSS from
       // codesplit chunks into this main css file as well.
       // This will result in *all* of your app's CSS being loaded upfront.
-      allChunks: false,
+      allChunks: false
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
@@ -130,9 +133,7 @@ if (config.build.productionGzip) {
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: new RegExp(
-        '\\.(' +
-        config.build.productionGzipExtensions.join('|') +
-        ')$'
+        `\\.(${config.build.productionGzipExtensions.join('|')})$`
       ),
       threshold: 10240,
       minRatio: 0.8
@@ -143,6 +144,16 @@ if (config.build.productionGzip) {
 if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
+
+if (config.build.zipPackage) {
+  const ZipPlugin = require('zip-webpack-plugin')
+  webpackConfig.plugins.push(
+    new ZipPlugin({
+      path: config.build.assetsRoot,
+      outPath: config.build.assetsRoot,
+      filename: 'archive.zip'
+    }))
 }
 
 module.exports = webpackConfig
