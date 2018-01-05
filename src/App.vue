@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import NavBar from './NavBar'
-import FootInfo from './FootInfo'
+import NavBar from 'COMPONENTS/NavBar'
+import FootInfo from 'COMPONENTS/FootInfo'
 
 export default {
   components: { NavBar, FootInfo }
@@ -18,5 +18,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/docs";
+@import "./assets/scss/docs";
 </style>

@@ -1,7 +1,7 @@
 import 'normalize.css'
 import './public/ElementComponents'
 import Vue from 'vue'
-import App from 'COMPONENTS/App'
+import App from './App'
 import router from 'ROUTERS/'
 import store from 'STORE/store'
 import './filters/'
