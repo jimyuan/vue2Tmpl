@@ -1,6 +1,6 @@
 {
   "name": "vue2-proj",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "A Vue.js scafford project.",
   "author": "Jim Yuan <aquarior@gmail.com>",
   "private": false,
@@ -52,6 +52,7 @@
     "portfinder": "^1.0.13",
     "postcss-import": "^11.1.0",
     "postcss-loader": "^2.1.1",
+    "prerender-spa-plugin": "^3.0.0-beta.2",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.7",
     "semver": "^5.5.0",

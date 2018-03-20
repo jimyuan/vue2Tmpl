@@ -90,6 +90,11 @@ module.exports = {
     // 指定是否需要在编译生成所有资源文件的同时生成一个压缩包
     zipPackage: false,
     // 是否需要在生产环境中去掉 console 语句
-    dropConsole: false
+    dropConsole: false,
+    // 是否开启对指定路由视图的预静态处理
+    prerender: {
+      flag: false,
+      routes: [ '/table' ]
+    }
   }
 }

@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import WsCache from 'web-storage-cache'
 import store from 'STORE/store'
-import * as types from 'STORE/types'
 import routes from './routes'
 
 Vue.use(VueRouter)
@@ -12,7 +11,7 @@ const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) {
     return savedPosition || { x: 0, y: 0 }
   },
-  // mode: 'history',
+  mode: 'history',
   routes
 })
 
@@ -20,8 +19,8 @@ const router = new VueRouter({
 const token = ls.get('token')
 if (token) {
   ls.deleteAllExpires()
-  store.commit(types.LOGIN, token)
-  store.commit(types.USER, ls.get('user'))
+  store.commit('login', token)
+  store.commit('user', ls.get('user'))
 }
 
 /**

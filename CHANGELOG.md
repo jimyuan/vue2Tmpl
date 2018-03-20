@@ -1,5 +1,9 @@
 # CHANGE LOG
 
+## 2018-03-20 (version 3.2.0)
+- 增加预静态化 webpack 插件
+- 更新 README 说明
+
 ## 2017-12-22 (version 3.1.0)
 - bug fixed: 解决了打包后引用样式和自定义样式加载顺序颠倒的问题
 - bug fixed: 解决了打包后 css 中引用资源的路径错误问题

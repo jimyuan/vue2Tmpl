@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import WsCache from 'web-storage-cache'
-import * as types from './types'
 
 // 设置本地缓存（token）过期时间为 7 天
 const exp = 3600 * 24 * 7
@@ -14,17 +13,15 @@ export default new Vuex.Store({
     token: null
   },
   mutations: {
-    [types.LOGIN]: (state, data) => {
-      ls.set('token', data, { exp })
-      state.token = data
+    login (state, data) {
+      ls.set('token', (state.token = data), { exp })
     },
-    [types.LOGOUT]: (state) => {
+    logout (state) {
       [state.token, state.user] = [null, {}]
       ls.clear()
     },
-    [types.USER]: (state, data) => {
-      ls.set('user', data, { exp })
-      state.user = data
+    user (state, data) {
+      ls.set('user', (state.user = data), { exp })
     }
   }
 })

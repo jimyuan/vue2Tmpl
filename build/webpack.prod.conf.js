@@ -153,7 +153,21 @@ if (config.build.zipPackage) {
       path: config.build.assetsRoot,
       outPath: config.build.assetsRoot,
       filename: 'archive.zip'
-    }))
+    })
+  )
+}
+
+if (config.build.prerender.flag) {
+  const PrerenderSpaPlugin = require('prerender-spa-plugin')
+  webpackConfig.plugins.push(
+    // generate static pages
+    new PrerenderSpaPlugin({
+      // Required - The path to the webpack-outputted app to prerender.
+      staticDir: config.build.assetsRoot,
+      // Required - Routes to render.
+      routes: config.build.prerender.routes
+    })
+  )
 }
 
 module.exports = webpackConfig
