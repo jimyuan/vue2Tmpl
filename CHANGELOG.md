@@ -1,5 +1,8 @@
 # CHANGE LOG
 
+## 2018-04-03 (version 3.2.1)
+- 利用脚手架提供的 proxy 设置了 ajax 跨域转发功能
+
 ## 2018-03-20 (version 3.2.0)
 - 增加预静态化 webpack 插件
 - 更新 README 说明

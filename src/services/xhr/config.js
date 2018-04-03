@@ -7,7 +7,7 @@ let apiRoot
  */
 const apiEnv = {
   'local': {
-    webAPI: 'http://localhost:8084/api'
+    webAPI: '/api'
   },
   'dev': {
     webAPI: 'http://10.66.1.133:8081/api'
