@@ -9,10 +9,12 @@
       Hello, {{ $store.state.user.userName }}!
       <el-button size="mini" type="text" @click="logOut">log out</el-button>
     </div>
+    <login-modal></login-modal>
   </header>
 </template>
 
 <script>
+import LoginModal from 'COMPONENTS/Login'
 export default {
   data () {
     return {
@@ -29,6 +31,7 @@ export default {
       this.$store.commit('logout')
       this.$router.push('/home')
     }
-  }
+  },
+  components: { LoginModal }
 }
 </script>

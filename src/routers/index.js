@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
       // 3
       ? next()
       // 4
-      : next({ path: '/login', query: { redirect: to.fullPath } })
+      : next({ path: '/home', query: { redirect: to.fullPath } })
   } else {
     next()
   }
