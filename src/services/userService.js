@@ -1,5 +1,5 @@
 import ajax from './xhr/'
-import api from './xhr/api'
+import api from './api/'
 
 /**
  * 对应后端涉及到用户认证的 API

@@ -24,7 +24,7 @@
         </tr>
       </tbody>
     </table>
-    <el-button type="primary" size="small" plain  @click="fetchUser" v-text="fetchStatus"></el-button>
+    <el-button plain type="primary" size="small"  @click="fetchUser" v-text="fetchStatus"></el-button>
     <el-button size="small" plain @click="resetFetch">Reset</el-button>
   </div>
 </template>
@@ -39,7 +39,6 @@ export default {
       tabSort: [],
       userData: [],
       userIds: [],
-      emptyText: 'Empty Data!',
       fetchStatus: 'Fetch!'
     }
   },
@@ -49,6 +48,10 @@ export default {
   },
 
   methods: {
+    /**
+     * 获取表格内容
+     *
+     */
     fetchUser () {
       this.fetchStatus = 'Fetching...'
       const req = [
@@ -65,6 +68,10 @@ export default {
           this.fetchStatus = 'Fetch Error!'
         })
     },
+    /**
+     * 重置表格内容
+     *
+     */
     resetFetch () {
       this.userData = []
       this.fetchStatus = 'Fetch!'

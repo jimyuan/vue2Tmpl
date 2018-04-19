@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :title="loginMsg" :visible="loginModal" width="300px">
+  <el-dialog :title="loginMsg" :visible.sync="loginModal" @close="clearPath" width="300px">
     <el-form :model="user">
       <el-form-item>
         <el-input v-model="user.usr" :placeholder="placeHoler.usr"></el-input>
@@ -50,15 +50,16 @@ export default {
     login () {
       userService.login(this.user)
         .then(({token, user}) => {
-          if (token) {
-            this.loginModal = false
-            this.$store.commit('login', token)
-            this.$store.commit('user', user)
-            this.$router.push({
-              path: this.$route.query.redirect || '/home'
-            })
-          }
+          this.loginModal = false
+          this.$store.commit('login', token)
+          this.$store.commit('user', user)
+          this.$router.push({
+            path: this.$route.query.redirect || '/home'
+          })
         })
+    },
+    clearPath () {
+      this.$router.push('/home')
     }
   }
 }
