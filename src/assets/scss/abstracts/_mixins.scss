@@ -67,3 +67,9 @@
     clear: both;
   }
 }
+
+@mixin hide-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

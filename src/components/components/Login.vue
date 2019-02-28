@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import userService from '@/api/user'
+import userService from 'SERVICES/userService'
 
 export default {
   data () {
@@ -49,7 +49,7 @@ export default {
   methods: {
     login () {
       userService.login(this.user)
-        .then(({ token, user }) => {
+        .then(({token, user}) => {
           this.loginModal = false
           this.$store.commit('login', token)
           this.$store.commit('user', user)

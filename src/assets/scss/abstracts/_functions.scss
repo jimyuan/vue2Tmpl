@@ -1,23 +1,5 @@
 @charset 'utf-8';
 /**
- * (!移动端使用!)
- * 将容器的设计尺寸(px)转为视口尺寸(rem)，魔蛇设计稿宽度为750px(iPhone6 size)
- * 参考 - https://github.com/amfe/lib-flexible
- *
- * @param  $pixel - 设计尺寸，可以只传数字
- * @param  $base-layout - 设计稿宽度，默认 750px
- * @return 转换后的 rem 尺寸
- *
- * Eg - width:px2rem(75) => width: 1rem
- */
-@function px2rem($pixel, $base-layout: 750px) {
-   @if unitless($pixel){
-    $pixel: $pixel * 1px;
-  }
-  @return $pixel / $base-layout * 10rem;
-}
-
-/**
  * z-index 管理，配合变量 z-layers，主要调用函数 z()
  *
  */

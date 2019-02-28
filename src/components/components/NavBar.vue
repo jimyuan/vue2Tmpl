@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import LoginModal from '@/components/Login'
+import LoginModal from 'COMPONENTS/Login'
 export default {
   data () {
     return {

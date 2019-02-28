@@ -1,5 +1,9 @@
 # CHANGE LOG
 
+## 2019-02-27 (version 4.0)
+- 采用 vue-cli 3 重写了脚手架
+- 封装 svg icon
+
 ## 2018-04-03 (version 3.2.1)
 - 利用脚手架提供的 proxy 设置了 ajax 跨域转发功能
 

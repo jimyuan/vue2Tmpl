@@ -6,6 +6,23 @@
   }
 }
 
+.success {
+  color: $success;
+}
+
+.danger {
+  color: $danger;
+}
+
+.warning {
+  color: $warning;
+}
+
+.unset {
+  color: $info;
+}
+
+
 .table {
   width: 100%;
   max-width: 100%;

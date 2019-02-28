@@ -7,16 +7,11 @@
     <foot-info></foot-info>
   </section>
 </template>
-
 <script>
-import NavBar from 'COMPONENTS/NavBar'
-import FootInfo from 'COMPONENTS/FootInfo'
+import NavBar from '@/components/NavBar'
+import FootInfo from '@/components/FootInfo'
 
 export default {
   components: { NavBar, FootInfo }
 }
 </script>
-
-<style lang="scss">
-@import "./assets/scss/docs";
-</style>

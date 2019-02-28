@@ -1,18 +1,24 @@
-import 'normalize.css'
-import './public/ElementComponents'
+import 'normalize.css/normalize.css'
+import '@/assets/scss/docs.scss'
+import './registerServiceWorker'
+import 'element-ui/lib/theme-chalk/index.css'
+import ElementUI from 'element-ui'
 import Vue from 'vue'
-import App from './App'
-import router from 'ROUTERS/'
-import store from 'STORE/store'
-import './filters/'
-// 该 polyfill 用在 IE 核心浏览器中，按需开启吧
-// import 'babel-polyfill'
-Vue.config.productionTip = false
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import svgIcon from '@/components/g-svg-icon'
+import '@/permission'
+import '@/filters'
 
-/* eslint-disable no-new */
+Vue.config.productionTip = false
+// 引入 Element UI
+Vue.use(ElementUI)
+// 引入全局组件 <svg-icon icon-class="icon-file-name" />
+Vue.component('svg-icon', svgIcon)
+
 new Vue({
-  el: '#app',
   router,
   store,
   render: h => h(App)
-})
+}).$mount('#app')

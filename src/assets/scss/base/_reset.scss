@@ -2,10 +2,32 @@
 
 html {
   -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
-  /* padding: $spacer * 4 0; */
+  font-family: $font-family;
+  height: 100%;
+  background-color: rgb(247, 247, 247);
+}
+
+a {
+  text-decoration: none;
+  color: #666;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
 .file-uploads {

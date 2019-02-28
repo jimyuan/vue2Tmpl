@@ -9,12 +9,15 @@
 
 @import 'base/reset';
 @import 'base/typography';
+@import 'base/transition';
 
 @import 'components/app';
-@import 'components/nav-bar';
 @import 'components/foot-info';
-
+@import 'components/nav-bar';
 
 @import 'pages/home';
 @import 'pages/list';
 @import 'pages/login';
+
+
+
