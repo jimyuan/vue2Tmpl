@@ -1,5 +1,9 @@
 # CHANGE LOG
 
+## 2019-05-05 (version 4.1.1)
+- 升级 @vue 各组件版本
+- 添加 svg icon 说明页
+
 ## 2019-02-27 (version 4.0)
 - 采用 vue-cli 3 重写了脚手架
 - 封装 svg icon

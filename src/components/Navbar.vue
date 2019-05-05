@@ -4,6 +4,7 @@
       <el-menu-item index="/home">首页</el-menu-item>
       <el-menu-item index="/list">列表</el-menu-item>
       <el-menu-item index="/table">表格</el-menu-item>
+      <el-menu-item index="/icons">图标</el-menu-item>
     </el-menu>
     <div class="login-user" v-if="$store.state.token">
       Hello, {{ $store.state.user.userName }}!

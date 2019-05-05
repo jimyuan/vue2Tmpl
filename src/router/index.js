@@ -26,6 +26,11 @@ export const constantRouterMap = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "table" */ '@/views/Table.vue')
+  }, {
+    // 图标
+    name: 'icons',
+    path: '/icons',
+    component: () => import(/* webpackChunkName: "icons" */ '@/views/Icons.vue')
   }
 ]
 

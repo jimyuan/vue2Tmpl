@@ -72,7 +72,6 @@ export function isvalidatemobile (phone) {
   } else {
     msg = '手机号码不能为空'
   }
-  list.push(result)
-  list.push(msg)
+  list.push(result, msg)
   return list
 }
