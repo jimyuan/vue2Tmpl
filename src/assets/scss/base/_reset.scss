@@ -1,8 +1,9 @@
 @charset "utf-8";
 
 html {
-  -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
   box-sizing: border-box;
   height: 100%;
 }
