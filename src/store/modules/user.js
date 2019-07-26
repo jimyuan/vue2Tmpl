@@ -38,7 +38,7 @@ const user = {
     // 登录
     Login ({ commit }, userInfo) {
       const username = userInfo.usr.trim()
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         userService.login(username, userInfo.pwd)
           .then(response => {
             const data = response
@@ -62,22 +62,13 @@ const user = {
               reject(new Error('getInfo: roles must be a non-null array !'))
             }
             commit('SET_USER_INFO', data)
-            // 存 name
-            // commit('SET_NAME', data.realname)
-            // 存 avatar
-            // commit('SET_AVATAR', data.headPic)
-            // 存 company
-            // commit('SET_POSITION', {
-            //   companyName: data.companyName,
-            //   departName: data.departName
-            // })
             resolve(data)
           })
       })
     },
 
     // 登出
-    LogOut ({ commit, state }) {
+    LogOut ({ commit }) {
       return new Promise((resolve, reject) => {
         userService.logout()
           .then(() => {
@@ -92,6 +83,7 @@ const user = {
     },
 
     // 前端 登出
+    /*
     FedLogOut ({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
@@ -99,6 +91,7 @@ const user = {
         resolve()
       })
     },
+    */
     // 动态修改权限
     ChangeRoles ({ commit }, role) {
       return new Promise(resolve => {

@@ -42,7 +42,7 @@ export default {
     login () {
       !this.loginValid && this.$store.dispatch('Login', this.user)
         .then(res => {
-          this.$router.push({ name: 'list' })
+          this.$router.push({ name: 'home' })
         })
     }
   }

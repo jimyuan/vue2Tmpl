@@ -6,8 +6,8 @@
       <el-menu-item index="/table">表格</el-menu-item>
       <el-menu-item index="/icons">图标</el-menu-item>
     </el-menu>
-    <div class="login-user" v-if="$store.state.token">
-      Hello, {{ $store.state.user.userName }}!
+    <div class="login-user" v-if="$store.getters.token">
+      Hello, <strong>{{ $store.getters.name }}</strong>!
       <el-button size="mini" type="text" @click="logOut">log out</el-button>
     </div>
     <login-modal></login-modal>
@@ -29,8 +29,12 @@ export default {
   },
   methods: {
     logOut () {
-      this.$store.commit('logout')
-      this.$router.push('/home')
+      // this.$store.commit('logout')
+      this.$store.dispatch('LogOut')
+        .then(() => {
+          this.$router.push('/home')
+          window.location.reload()
+        })
     }
   },
   components: { LoginModal }

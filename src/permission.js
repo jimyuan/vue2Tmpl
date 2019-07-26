@@ -4,6 +4,7 @@ import NProgress from 'nprogress' // Progress 进度条
 import 'nprogress/nprogress.css'// Progress 进度条样式
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth' // 验权
+import { constantRouterMap } from '@/router'
 // import { setTitle } from '@/utils/util' // 设置浏览器头部标题
 
 // permission judge function
@@ -14,7 +15,10 @@ import { getToken } from '@/utils/auth' // 验权
 // }
 
 // 不重定向白名单
-const whiteList = ['/login', '/home', '/table']
+const whiteList = constantRouterMap
+  .filter(r => r.meta && r.meta.whiteList)
+  .map(p => p.path)
+
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if (getToken()) {
@@ -39,13 +43,11 @@ router.beforeEach((to, from, next) => {
             next({ ...to, replace: true })
           })
           .catch((err) => {
-            store.dispatch('FedLogOut').then(() => {
+            store.dispatch('LogOut').then(() => {
               Message.error(err || 'Verification failed, please login again')
               next({ path: '/' })
             })
           })
-        // 拉取项目列表，获取第一项 id
-        // store.dispatch('GetProj')
       } else {
         // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
         next()
@@ -57,12 +59,9 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    if (whiteList.some(path => to.path.startsWith(path))) {
-      next()
-    } else {
-      next('/login')
-      NProgress.done()
-    }
+    // 没有 token，只能进白名单路由
+    whiteList.some(path => to.path.startsWith(path)) ? next() : next('/login')
+    NProgress.done()
   }
 })
 

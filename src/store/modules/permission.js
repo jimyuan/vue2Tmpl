@@ -34,30 +34,21 @@ function filterAsyncRouter (asyncRouterMap, roles) {
 const permission = {
   state: {
     routers: constantRouterMap,
-    addRouters: [],
-    curPath: ''
+    addRouters: []
   },
   mutations: {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
       state.routers = constantRouterMap.concat(routers)
       // console.log('state.routers', state.routers)
-    },
-    CUR_PATH: (state, { path }) => {
-      state.curPath = path
     }
   },
   actions: {
     GenerateRoutes ({ commit }, roles) {
       return new Promise(resolve => {
-        let accessedRouters
-        if (roles.indexOf('admin') >= 0) {
-          // console.log('admin>=0')
-          accessedRouters = asyncRouterMap
-        } else {
-          // console.log('admin<0')
-          accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
-        }
+        const accessedRouters = roles.indexOf('admin') >= 0
+          ? asyncRouterMap
+          : filterAsyncRouter(asyncRouterMap, roles)
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })

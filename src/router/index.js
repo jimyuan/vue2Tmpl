@@ -12,24 +12,33 @@ export const constantRouterMap = [
   }, {
     path: '/home',
     name: 'home',
+    meta: {
+      whiteList: true
+    },
     component: Home
   }, {
     // 登录页
     name: 'login',
     path: '/login',
+    meta: {
+      whiteList: true
+    },
     component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
   }, {
     // 表格
     name: 'table',
     path: '/table',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    meta: {
+      whiteList: true
+    },
     component: () => import(/* webpackChunkName: "table" */ '@/views/Table.vue')
   }, {
     // 图标
     name: 'icons',
     path: '/icons',
+    meta: {
+      whiteList: true
+    },
     component: () => import(/* webpackChunkName: "icons" */ '@/views/Icons.vue')
   }
 ]
