@@ -1,9 +1,9 @@
+import 'nprogress/nprogress.css'// Progress 进度条样式
 import router from './router'
 import store from './store'
 import NProgress from 'nprogress' // Progress 进度条
-import 'nprogress/nprogress.css'// Progress 进度条样式
 import { Message } from 'element-ui'
-import { getToken } from '@/utils/auth' // 验权
+import { getToken } from '@/utils/auth' // token 存取
 import { constantRouterMap } from '@/router'
 // import { setTitle } from '@/utils/util' // 设置浏览器头部标题
 
@@ -59,8 +59,14 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    // 没有 token，只能进白名单路由
-    whiteList.some(path => to.path.startsWith(path)) ? next() : next('/login')
+    // 没有 token，只能进白名单路由，否则进登录页
+    whiteList.some(path => to.path.startsWith(path))
+      ? next()
+      : next({
+        path: '/login',
+        query: { redirect: from.path === '/login' ? '/home' : from.path },
+        replace: true
+      })
     NProgress.done()
   }
 })

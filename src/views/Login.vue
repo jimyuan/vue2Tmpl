@@ -42,7 +42,10 @@ export default {
     login () {
       !this.loginValid && this.$store.dispatch('Login', this.user)
         .then(res => {
-          this.$router.push({ name: 'home' })
+          // this.$router.push({ name: 'home' })
+          this.$router.push({
+            path: this.$route.query.redirect || '/home'
+          })
         })
     }
   }

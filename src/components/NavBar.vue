@@ -10,12 +10,10 @@
       Hello, <strong>{{ $store.getters.name }}</strong>!
       <el-button size="mini" type="text" @click="logOut">log out</el-button>
     </div>
-    <login-modal></login-modal>
   </header>
 </template>
 
 <script>
-import LoginModal from '@/components/Login'
 export default {
   data () {
     return {
@@ -36,7 +34,6 @@ export default {
           window.location.reload()
         })
     }
-  },
-  components: { LoginModal }
+  }
 }
 </script>

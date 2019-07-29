@@ -9,7 +9,7 @@
     <i>在 iconfont 处获得的 svg 文件大都含冗余代码，可以去 <a href="https://www.zhangxinxu.com/sp/svgo/" target="_blank">这里</a> 在线过滤代码</i>
     <div class="icon-list">
       <span v-for="icon of iconList" :key="icon">
-        <svg-icon :icon-class="icon" class="icon-demo" /> <i v-text="icon"></i>
+        <svg-icon :icon-name="icon" class="icon-demo" /> <i v-text="icon"></i>
       </span>
     </div>
   </section>
