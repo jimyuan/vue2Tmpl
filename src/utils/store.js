@@ -1,5 +1,3 @@
-import { validatenull } from '@/utils/validate'
-
 /*
  * 存储localStorage
  * name: key
@@ -20,7 +18,7 @@ export const setStore = (name, content, type = false) => {
  */
 export const getStore = name => {
   const obj = localStorage.getItem(name) || sessionStorage.getItem(name)
-  return validatenull(obj) ? null : JSON.parse(obj).content
+  return obj ? JSON.parse(obj).content : null
 }
 /**
  * 删除localStorage

@@ -22,7 +22,8 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(config => {
   if (store.getters.token) {
-    config.headers[Const.tokenName] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    // 让每个请求携带自定义token 请根据实际情况自行修改
+    config.headers[Const.tokenName] = getToken()
   }
   return config
 }, error => {
@@ -40,28 +41,19 @@ service.interceptors.response.use(
     const res = response.data
     // 04002:非法的token;
     if (+res.respCode === 4002) {
-      MessageBox.confirm('你已被登出，请者重新登录', '确定登出', {
+      return MessageBox.confirm('你已被登出，请者重新登录', '确定登出', {
         confirmButtonText: '重新登录',
         cancelButtonText: '取消',
         type: 'warning'
-      })
-        .then(() => {
-          return store.dispatch('FedLogOut')
-        })
-        .then(() => {
-          // 为了重新实例化vue-router对象 避免bug
-          location.reload()
-        })
-      return Promise.reject(new Error('error'))
+      }).then(() => store.dispatch('LogOut'))
     } else if (+res.respCode !== 0) {
       errorTip(res.memo)
-      return Promise.reject(new Error('error'))
+      return Promise.reject(new Error(`respCode: ${res.respCode}`))
     } else {
-      return response.data.data
+      return res.data
     }
   },
   error => {
-    console.log('err' + error)
     errorTip(error)
     return Promise.reject(error)
   }

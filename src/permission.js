@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
     // 有 token 的情况
     if (to.path === '/') {
       next({ path: '/home' })
-      NProgress.done()
+      // NProgress.done()
     } else {
       if (store.getters.roles.length === 0) {
         // 拉取用户信息
@@ -39,14 +39,14 @@ router.beforeEach((to, from, next) => {
           .then(() => {
             // 动态添加可访问路由表
             router.addRoutes(store.getters.addRouters)
-            // hack方法 确保addRoutes已完成
             next({ ...to, replace: true })
           })
-          .catch((err) => {
-            store.dispatch('LogOut').then(() => {
-              Message.error(err || 'Verification failed, please login again')
-              next({ path: '/' })
-            })
+          .catch(err => {
+            store.dispatch('LogOut')
+              .then(() => {
+                Message.error(err + '')
+                next({ path: '/' })
+              })
           })
       } else {
         // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
