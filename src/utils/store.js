@@ -5,20 +5,22 @@
  * type: true 为 session storage，默认 false
  */
 export const setStore = (name, content, type = false) => {
-  const obj = {
-    content,
-    type,
-    datetime: new Date().getTime()
-  }
+  const obj = { content, type, datetime: +new Date() }
   const storage = type ? sessionStorage : localStorage
   storage.setItem(name, JSON.stringify(obj))
 }
 /**
  * 获取localStorage
+ * 过期则返回 null
  */
-export const getStore = name => {
-  const obj = localStorage.getItem(name) || sessionStorage.getItem(name)
-  return obj ? JSON.parse(obj).content : null
+export const getStore = (name, expired = null) => {
+  const obj = JSON.parse(localStorage.getItem(name) || sessionStorage.getItem(name))
+  // 不存在
+  if (!obj) return null
+  // 过期
+  if (expired !== null && +new Date() - obj.datetime > expired) return null
+  // 返回真实数据
+  return obj.content
 }
 /**
  * 删除localStorage
@@ -32,15 +34,11 @@ export const removeStore = name => {
  * 获取全部localStorage
  */
 export const getAllStore = (type = false) => {
-  const list = []
   const storage = type ? sessionStorage : localStorage
-  for (let i = 0, len = storage.length; i < len; i++) {
-    list.push({
-      name: storage.key(i),
-      content: getStore(storage.key(i))
-    })
-  }
-  return list
+  return Object.keys(storage).map(item => ({
+    name: item,
+    content: getStore(item)
+  }))
 }
 
 /**

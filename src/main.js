@@ -1,4 +1,5 @@
 import 'normalize.css/normalize.css'
+import 'nprogress/nprogress.css' // Progress 进度条样式
 import '@/assets/scss/docs.scss'
 import 'element-ui/lib/theme-chalk/index.css'
 import './registerServiceWorker'

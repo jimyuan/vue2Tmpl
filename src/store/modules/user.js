@@ -6,17 +6,6 @@ const user = {
     token: getToken(),
     roles: [],
     info: {
-      companyId: 0,
-      companyName: '',
-      departId: 0,
-      departName: '',
-      email: '',
-      mobilePhone: '',
-      realname: '',
-      roleId: 0,
-      roleName: '',
-      userId: 0,
-      userStatus: 0,
       username: ''
     }
 
@@ -38,25 +27,21 @@ const user = {
     // 登录
     Login ({ commit }, userInfo) {
       const username = userInfo.usr.trim()
-      return new Promise(resolve => {
-        userService.login(username, userInfo.pwd)
-          .then(response => {
-            const data = response
-            // 存 token
-            setToken(data.token)
-            commit('SET_TOKEN', data.token)
-            resolve()
-          })
-      })
+      return userService.login(username, userInfo.pwd)
+        .then(data => {
+          const { token } = data
+          // 存 token
+          setToken(token)
+          commit('SET_TOKEN', token)
+        })
     },
 
     // 获取用户信息
     GetInfo ({ commit, state }) {
       return userService.getInfo(state.token)
         .then(data => {
-          if (!data) return Promise.reject(new Error('Data error!'))
           // 验证返回的roles是否是一个非空数组
-          const roles = [data.roleName]
+          const roles = [data.roleName || 'admin']
           commit('SET_ROLES', roles)
           commit('SET_USER_INFO', data)
           return data
@@ -71,9 +56,6 @@ const user = {
           commit('SET_ROLES', [])
           commit('SET_USER_INFO', {})
           removeToken()
-        })
-        .catch(error => {
-          return Promise.reject(error)
         })
     },
 
@@ -90,8 +72,7 @@ const user = {
     // 动态修改权限
     ChangeRoles ({ commit, state }) {
       userService.getInfo(state.token)
-        .then(res => {
-          const data = res
+        .then(data => {
           commit('SET_ROLES', [data.roleName])
           commit('SET_USER_INFO', data)
           return data

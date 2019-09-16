@@ -1,8 +1,7 @@
-import 'nprogress/nprogress.css'// Progress 进度条样式
 import router from './router'
 import store from './store'
 import NProgress from 'nprogress' // Progress 进度条
-import { Message } from 'element-ui'
+import { specialTip } from '@/utils/message'
 import { getToken } from '@/utils/auth' // token 存取
 import { constantRouterMap } from '@/router'
 // import { setTitle } from '@/utils/util' // 设置浏览器头部标题
@@ -24,7 +23,7 @@ router.beforeEach((to, from, next) => {
   if (getToken()) {
     // 有 token 的情况
     if (to.path === '/') {
-      next({ path: '/home' })
+      next({ name: 'home' })
       // NProgress.done()
     } else {
       if (store.getters.roles.length === 0) {
@@ -44,7 +43,7 @@ router.beforeEach((to, from, next) => {
           .catch(err => {
             store.dispatch('LogOut')
               .then(() => {
-                Message.error(err + '')
+                specialTip(err, 'error')
                 next({ path: '/' })
               })
           })
