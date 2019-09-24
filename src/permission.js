@@ -4,76 +4,60 @@ import NProgress from 'nprogress' // Progress 进度条
 import { specialTip } from '@/utils/message'
 import { getToken } from '@/utils/auth' // token 存取
 import { constantRouterMap } from '@/router'
-// import { setTitle } from '@/utils/util' // 设置浏览器头部标题
 
-// permission judge function
-// function hasPermission(roles, permissionRoles) {
-//   if (roles.indexOf('admin') >= 0) return true // admin permission passed directly
-//   if (!permissionRoles) return true
-//   return roles.some(role => permissionRoles.indexOf(role) >= 0)
-// }
-
-// 不重定向白名单
-const whiteList = constantRouterMap
-  .filter(r => r.meta && r.meta.whiteList)
-  .map(p => p.path)
-
+/**
+ * 路由规则
+ * 1 无 token
+ *  1.1 在白名单内，直接跳转
+ *  1.2 否则，跳登录页
+ * 2. 有 token 有 roles，直接路由，碰到登录页跳转到默认页即可
+ * 3. 有 token 无 roles (第一次登陆或刷新页面)
+ *  3.1 获取用户权限信息
+ *  3.2 根据 roles 权限生成可访问的路由表
+ *  3.3 获取信息失败则执行 logout 流程
+ */
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  if (getToken()) {
-    // 有 token 的情况
-    if (to.path === '/') {
-      next({ name: 'home' })
-      // NProgress.done()
-    } else {
-      if (store.getters.roles.length === 0) {
-        // 拉取用户信息
-        store.dispatch('GetInfo')
-          .then(res => {
-            // note: roles must be a array! such as: ['editor','develop']
-            const roles = [res.roles]
-            return store.dispatch('GenerateRoutes', roles)
-          })
-          // 根据roles权限生成可访问的路由表
-          .then(() => {
-            // 动态添加可访问路由表
-            router.addRoutes(store.getters.addRouters)
-            next({ ...to, replace: true })
-          })
-          .catch(err => {
-            store.dispatch('LogOut')
-              .then(() => {
-                specialTip(err, 'error')
-                next({ path: '/' })
-              })
-          })
-      } else {
-        // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
-        next()
-        // if (hasPermission(store.getters.roles, to.meta.roles)) {
-        //   next()
-        // } else {
-        //   next({ path: '/401', replace: true, query: { noGoBack: true }})
-        // }
-      }
-    }
-  } else {
-    // 没有 token，只能进白名单路由，否则进登录页
-    whiteList.some(path => to.path.startsWith(path))
+  // 1 无 token
+  if (!getToken()) {
+    constantRouterMap
+      .some(item => item.whiteList ? to.path.startsWith(item.path) : false)
       ? next()
       : next({
-        path: '/login',
-        query: { redirect: from.path === '/login' ? '/home' : from.path },
+        name: 'login',
+        query: { redirect: from.name === 'login' ? '/home' : to.path },
         replace: true
       })
     NProgress.done()
+    return true
   }
+  // 2. 有 token 有 roles，直接路由，如进登录页，跳转到默认页
+  if (store.getters.roles.length > 0) {
+    to.name === 'login' ? next({ name: 'home', replace: true }) : next()
+    NProgress.done()
+    return true
+  }
+  // 3. 有 token 无 roles (第一次登陆或刷新页面)
+  // 3.1 获取用户权限信息
+  store.dispatch('GetInfo')
+    .then(res => {
+      // note: roles must be a array! such as: ['editor','develop']
+      const roles = [res.roles]
+      // 3.2 根据 roles 权限生成可访问的路由表
+      return store.dispatch('GenerateRoutes', roles)
+    })
+    .then(() => {
+      router.addRoutes(store.getters.addRouters)
+      next({ ...to, replace: true })
+    })
+    // 3.3 获取信息失败则执行 logout 流程
+    .catch(err => {
+      store.dispatch('LogOut')
+        .then(() => {
+          specialTip(err, 'error')
+          next({ name: 'home' })
+        })
+    })
 })
 
-router.afterEach(() => {
-  NProgress.done() // 结束Progress
-  // setTimeout(() => {
-  //   const browserHeaderTitle = store.getters.browserHeaderTitle
-  //   setTitle(browserHeaderTitle)
-  // }, 0)
-})
+// router.afterEach(() => NProgress.done())

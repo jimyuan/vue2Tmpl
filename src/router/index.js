@@ -4,6 +4,12 @@ import Home from '@/views/Home.vue'
 
 Vue.use(Router)
 
+// 在使用Element UI 时点击同一个路由，控制台报错，用以下代码可消除报错
+const originalPush = Router.prototype.push
+Router.prototype.push = function (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 // 定义静态路由
 export const constantRouterMap = [
   {
@@ -12,33 +18,25 @@ export const constantRouterMap = [
   }, {
     path: '/home',
     name: 'home',
-    meta: {
-      whiteList: true
-    },
+    whiteList: true,
     component: Home
   }, {
     // 登录页
     name: 'login',
     path: '/login',
-    meta: {
-      whiteList: true
-    },
+    whiteList: true,
     component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
   }, {
     // 表格
     name: 'table',
     path: '/table',
-    meta: {
-      whiteList: true
-    },
+    whiteList: true,
     component: () => import(/* webpackChunkName: "table" */ '@/views/Table.vue')
   }, {
     // 图标
     name: 'icons',
     path: '/icons',
-    meta: {
-      whiteList: true
-    },
+    whiteList: true,
     component: () => import(/* webpackChunkName: "icons" */ '@/views/Icons.vue')
   }
 ]

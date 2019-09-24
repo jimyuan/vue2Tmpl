@@ -1,7 +1,6 @@
-import 'normalize.css/normalize.css'
+import 'element-ui/lib/theme-chalk/index.css'
 import 'nprogress/nprogress.css' // Progress 进度条样式
 import '@/assets/scss/docs.scss'
-import 'element-ui/lib/theme-chalk/index.css'
 import './registerServiceWorker'
 import Vue from 'vue'
 import App from './App.vue'
