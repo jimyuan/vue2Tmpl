@@ -1,16 +1,9 @@
-import Const from '@/utils/const'
 import { setStore, getStore, removeStore } from '@/utils/store'
 
-const TokenKey = Const.tokenName
+const TokenKey = 'token'
 
-export function getToken () {
-  return getStore(TokenKey)
-}
+export const getToken = () => getStore(TokenKey)
 
-export function setToken (token) {
-  return setStore(TokenKey, token, true)
-}
+export const setToken = token => setStore(TokenKey, token, true)
 
-export function removeToken () {
-  return removeStore(TokenKey)
-}
+export const removeToken = () => removeStore(TokenKey)

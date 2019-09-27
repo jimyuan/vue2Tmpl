@@ -57,26 +57,6 @@ const user = {
           commit('SET_USER_INFO', {})
           removeToken()
         })
-    },
-
-    // 前端 登出
-    /*
-    FedLogOut ({ commit }) {
-      return new Promise(resolve => {
-        commit('SET_TOKEN', '')
-        removeToken()
-        resolve()
-      })
-    },
-    */
-    // 动态修改权限
-    ChangeRoles ({ commit, state }) {
-      userService.getInfo(state.token)
-        .then(data => {
-          commit('SET_ROLES', [data.roleName])
-          commit('SET_USER_INFO', data)
-          return data
-        })
     }
   }
 }
